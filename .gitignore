@@ -1,0 +1,71 @@
+# compiled output
+/dist
+/dist-server
+/tmp
+/out-tsc
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+yarn.lock
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# proxy
+/proxy/proxy-monica.conf.json
+
+# angulardoc
+.angulardoc.json
+
+# sonar
+/.scannerwork
+
+# pid crashes
+.attach_pid*
+
+# local configurations
+src/environments/environment.vpn.ts
+
+# allure report
+allure/
+
+# xunit report
+xunit-report.xml
+
+# cert folder
+/.cert
+
+# Dependency Track context
+bom.xml
+dependency-check-bin/
+dependency-check-reports/
+
+.angular
