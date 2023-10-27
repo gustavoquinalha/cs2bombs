@@ -1,0 +1,36 @@
+{
+  "map": "Mirage",
+  "team": "T",
+  "smokes": [
+    {
+      "id": 1,
+      "x": 100,
+      "y": 120,
+      "bombs": [
+        {
+          "id": 1,
+          "name": "Smoke janela"
+        },
+        {
+          "id": 2,
+          "name": "Smoke janela 2"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "x": 300,
+      "y": 442,
+      "bombs": [
+        {
+          "id": 1,
+          "name": "Smoke L"
+        },
+        {
+          "id": 2,
+          "name": "Smoke L 2"
+        }
+      ]
+    }
+  ]
+}
