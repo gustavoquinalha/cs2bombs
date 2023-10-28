@@ -1,5 +1,5 @@
 <div class="p-4 flex gap-4 flex-col w-full max-w-7xl mx-auto" *ngIf="filter">
-  <div class="sticky top-0 left-0 shadow w-full p-4 rounded-md bg-primary-2 overflow-hidden z-10">
+  <div class="sticky top-0 left-0 shadow w-full p-4 rounded-md bg-primary-2 z-10">
     <div class="flex items-center justify-center gap-4 w-full">
       <div class="">
         <h1 class="text-primary-5 font-bold text-2xl">CS2BOMBS</h1>
@@ -8,46 +8,57 @@
       <div class="h-10 bg-primary-3" style="width: 1px"></div>
 
       <div class="w-full flex items-center justify-center gap-4">
-        <div class="w-full">
-          <select id="mapSelect" [(ngModel)]="filter.map" (ngModelChange)="changeFilter()" class="bg-primary-3 text-sm rounded-lg capitalize block w-full p-3 text-primary-5 outline-none shadow">
-            <option *ngFor="let map of config.maps" [value]="map">
-              {{ map }}
-            </option>
-          </select>
+        <div class="relative">
+          <div class="bg-primary-3 rounded-lg h-10 uppercase text-xs font-black text-primary-4 whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-44 text-left max-w-full cursor-pointer" (click)="toggleDropdownMap()">{{ filter.map }}</div>
+          <div class="fixed left-0 top-0 w-screen h-screen z-10" *ngIf="dropdownMap" (click)="toggleDropdownMap()"></div>
+          <div class="flex flex-col gap-2 absolute z-30 top-10 left-0 bg-primary-2 shadow-lg rounded-lg p-2 mt-1 w-full border border-primary-3" *ngIf="dropdownMap">
+            <ng-container *ngFor="let map of config.maps">
+              <label [for]="map.name" class="flex items-center justify-center text-left px-3 overflow-hidden rounded-lg whitespace-nowrap h-10 hover:bg-primary-1 cursor-pointer" [ngClass]="{ '!bg-primary-7 shadow': map.name === filter.map }">
+                <input type="radio" class="hidden" [id]="map.name" [(ngModel)]="filter.map" (ngModelChange)="toggleDropdownMap()" [value]="map.name" />
+                <span class="uppercase text-xs font-black text-primary-4 m-0 p-0 block w-full">{{ map.name }}</span>
+              </label>
+            </ng-container>
+          </div>
         </div>
 
-        <div class="w-full">
-          <select id="teamSelect" [(ngModel)]="filter.team" (ngModelChange)="changeFilter()" class="bg-primary-3 text-sm rounded-lg uppercase block w-full p-3 text-primary-5 outline-none shadow">
-            <option *ngFor="let team of config.teams" [value]="team">
-              {{ team }}
-            </option>
-          </select>
+        <div class="relative">
+          <div class="bg-primary-3 rounded-lg h-10 uppercase text-xs font-black text-primary-4 whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-44 text-left max-w-full cursor-pointer" (click)="toggleDropdownTeam()">{{ filter.team }}</div>
+          <div class="fixed left-0 top-0 w-screen h-screen z-10" *ngIf="dropdownTeam" (click)="toggleDropdownTeam()"></div>
+          <div class="flex flex-col gap-2 absolute z-30 top-10 left-0 bg-primary-2 shadow-lg rounded-lg p-2 mt-1 w-full border border-primary-3" *ngIf="dropdownTeam">
+            <ng-container *ngFor="let team of config.teams">
+              <label [for]="team.name" class="flex items-center justify-center text-left px-3 overflow-hidden rounded-lg whitespace-nowrap h-10 hover:bg-primary-1 cursor-pointer" [ngClass]="{ '!bg-primary-7 shadow': team.name === filter.team }">
+                <input type="radio" class="hidden" [id]="team.name" [(ngModel)]="filter.team" (ngModelChange)="toggleDropdownTeam()" [value]="team.name" />
+                <span class="uppercase text-xs font-black text-primary-4 m-0 p-0 block w-full">{{ team.name }}</span>
+              </label>
+            </ng-container>
+          </div>
         </div>
 
         <div class="h-10 bg-primary-3" style="width: 1px"></div>
 
-        <div class="w-full">
-          <select id="bombSelect" [(ngModel)]="filter.bomb" (ngModelChange)="changeFilter()" class="bg-primary-3 text-sm rounded-lg capitalize block w-full p-3 text-primary-5 outline-none shadow">
-            <option *ngFor="let bomb of config.bombs" [value]="bomb">
-              {{ bomb }}
-            </option>
-          </select>
+        <div class="flex gap-2">
+          <ng-container *ngFor="let bomb of config.bombs">
+            <label [for]="bomb.name" class="flex items-center justify-center text-center p-2 overflow-hidden rounded-lg w-10 h-10 hover:bg-primary-1 cursor-pointer" [ngClass]="{ '!bg-primary-3 shadow': bomb.name === filter.bomb }">
+              <input type="radio" class="hidden" [id]="bomb.name" [(ngModel)]="filter.bomb" [value]="bomb.name" />
+              <img src="assets/img/bombs/{{ bomb.name }}.svg" alt="image" class="h-6" />
+            </label>
+          </ng-container>
         </div>
 
         <div class="h-10 bg-primary-3" style="width: 1px"></div>
 
-        <input type="text" id="search" [(ngModel)]="filter.search" (ngModelChange)="changeFilter()" class="bg-primary-3 text-sm rounded-lg capitalize block w-full p-3 text-primary-5 outline-none shadow" placeholder="Pesquisar..." />
+        <input type="text" id="search" [(ngModel)]="filter.search" (ngModelChange)="changeFilter()" class="bg-primary-3 text-sm rounded-lg h-10 capitalize block w-full p-3 text-primary-5 outline-none shadow" placeholder="Pesquisar..." />
       </div>
     </div>
   </div>
 
   <div class="w-full pt-4">
     <div class="flex w-full gap-4" *ngIf="filter.map">
-      <div class="relative mx-auto" style="width: 800px; min-width: 800px; height: 800px" (click)="reset()">
+      <div class="relative mx-auto" style="width: 800px; min-width: 800px; height: 800px">
         <div *ngFor="let bombs of filteredBombs" [ngClass]="filter.team">
           <ng-container *ngFor="let group of bombs[filter.bomb]">
             <ng-container *ngIf="filter.team === group.team">
-              <div class="w-10 h-10 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all" (click)="selectBomb($event, group)" [ngStyle]="{ 'top.%': group.y, 'left.%': group.x }" [title]="group.name">
+              <div class="w-10 h-10 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all" (click)="selectBomb($event, group)" [ngClass]="{ active: selectedBomb.id === group.id }" [ngStyle]="{ 'top.%': group.y, 'left.%': group.x }" [title]="group.name">
                 <div *ngIf="group.bombs?.length > 1" class="w-5 h-5 bg-rose-500 text-white text-xs font-black rounded-full absolute bottom-6 left-6 flex justify-center items-center text-center shadow z-30">
                   {{ group.bombs?.length }}
                 </div>
@@ -60,8 +71,34 @@
       </div>
 
       <div class="flex flex-col gap-4" *ngIf="selectedBomb.id !== null">
+        <button class="w-full transition-all px-4 py-3 bg-primary-3 hover:bg-primary-6 text-primary-5 hover:text-primary-1 flex gap-2 justify-center items-center text-center rounded-md shadow outline-none">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          <span>Ver vídeo</span>
+        </button>
+
+        <div class="bg-primary-2 rounded-md shadow overflow-hidden w-80 h-60 flex justify-center items-center relative">
+          <div class="flex justify-end items-center w-full gap-2 absolute right-2 top-2">
+            <div class="bg-primary-2 text-primary-4 font-medium shadow-sm px-2 py-1 rounded text-xs uppercase" *ngFor="let key of selectedBomb?.group?.bombs[this.selectedBomb.id]?.keys">
+              {{ key }}
+            </div>
+          </div>
+          <img src="assets/img/maps/{{ filter.map }}/{{ selectedBomb?.group?.id }}/{{ selectedBomb?.id }}/position.jpg" alt="image" class="object-cover transition-all zoom-img h-96" />
+        </div>
+
+        <div class="bg-primary-2 rounded-md shadow overflow-hidden w-80 h-60 flex justify-center items-center">
+          <img src="assets/img/maps/{{ filter.map }}/{{ selectedBomb?.group?.id }}/{{ selectedBomb?.id }}/pixel.jpg" alt="image" class="object-cover transition-all zoom-img h-96" />
+        </div>
+
         <div class="flex justify-center items-center h-8">
-          <div class="text-primary-3 hover:text-primary-4 cursor-pointer transition-colors" [ngClass]="{ 'pointer-events-none opacity-20': selectedBomb?.id === 0 }" (click)="prevPixel()">
+          <div
+            class="text-primary-3 hover:text-primary-4 cursor-pointer transition-colors"
+            [ngClass]="{
+              'pointer-events-none opacity-20': selectedBomb?.id === 0
+            }"
+            (click)="prevPixel()"
+          >
             <svg class="h-8 w-8" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" />
               <line x1="5" y1="12" x2="19" y2="12" />
@@ -72,11 +109,23 @@
 
           <div class="gap-2 flex justify-center items-center w-full">
             <ng-container *ngFor="let bomb of selectedBomb?.group?.bombs">
-              <div (click)="setPixel(bomb.id)" [ngClass]="{ '!bg-primary-6': this.selectedBomb.id === bomb.id }" class="w-4 h-4 rounded-full z-20 bg-primary-3 hover:bg-primary-7 content-pin cursor-pointer transition-colors"></div>
+              <div
+                (click)="setPixel(bomb.id)"
+                [ngClass]="{
+                  '!bg-primary-6': this.selectedBomb.id === bomb.id
+                }"
+                class="w-4 h-4 rounded-full z-20 bg-primary-3 hover:bg-primary-7 content-pin cursor-pointer transition-colors"
+              ></div>
             </ng-container>
           </div>
 
-          <div class="text-primary-3 hover:text-primary-4 cursor-pointer transition-colors" [ngClass]="{ 'pointer-events-none opacity-20': selectedBomb?.id >= selectedBomb?.group?.bombs?.length -1 }" (click)="nextPixel()">
+          <div
+            class="text-primary-3 hover:text-primary-4 cursor-pointer transition-colors"
+            [ngClass]="{
+              'pointer-events-none opacity-20': selectedBomb?.id >= selectedBomb?.group?.bombs?.length - 1
+            }"
+            (click)="nextPixel()"
+          >
             <svg class="h-8 w-8" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" />
               <line x1="5" y1="12" x2="19" y2="12" />
@@ -85,25 +134,6 @@
             </svg>
           </div>
         </div>
-
-
-        <div class="bg-primary-2 rounded-md shadow overflow-hidden w-80 h-60 flex justify-center items-center relative">
-          <div class="flex justify-end items-center w-full gap-2 absolute right-2 top-2">
-            <div class="bg-primary-2 text-primary-4 font-medium shadow-sm  px-2 py-1 rounded text-xs uppercase" *ngFor="let key of selectedBomb?.group?.bombs[this.selectedBomb.id]?.keys">
-              {{key}}
-            </div>
-          </div>
-          <img src="assets/img/maps/{{ filter.map }}/{{ selectedBomb?.group?.id }}/{{ selectedBomb?.id }}/position.jpg" alt="image" class="object-cover transition-all zoom-img h-96" />
-        </div>
-
-        <div class="bg-primary-2 rounded-md shadow overflow-hidden w-80 h-60 flex justify-center items-center">
-          <img src="assets/img/maps/{{ filter.map }}/{{ selectedBomb?.group?.id }}/{{ selectedBomb?.id }}/pixel.jpg" alt="image" class="object-cover transition-all zoom-img h-96" />
-        </div>
-
-        <button class="w-full transition-all px-4 py-3 bg-primary-3 hover:bg-primary-6 text-primary-5 hover:text-primary-1 flex gap-2 justify-center items-center text-center rounded-md shadow outline-none">
-          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3" /></svg>
-          <span>Ver vídeo</span>
-        </button>
       </div>
     </div>
 
