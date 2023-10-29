@@ -92,15 +92,11 @@ export class AppComponent {
   }
 
   changeFilter(): void {
-    console.log('changeFilter');
-
     this.filteredBombs = this.maps?.filter(mapa => mapa.name === this.filter.map);
     this.reset();
   }
 
   selectBomb(event: any, group: any) {
-    console.log('selectBomb');
-
     if (event) {
       event.stopPropagation()
     }
@@ -120,14 +116,10 @@ export class AppComponent {
   }
 
   setPixel(bombId: number) {
-    console.log('setPixel', bombId);
-
     this.selectedBomb.id = bombId;
   }
 
   changeBomb(name: string) {
-    console.log('changeBomb', name);
-
     this.config.bombs.forEach(bomb => {
       bomb.checked = false;
     });
@@ -136,25 +128,25 @@ export class AppComponent {
   }
 
   reset() {
-    console.log('reset');
-
     this.selectedBomb = {
       id: null,
       group: null,
     }
   }
 
-  toggleDropdownMap() {
-    console.log('toggleDropdownMap');
+  toggleDropdownMap(value: boolean, change: boolean) {
+    this.dropdownMap = value;
 
-    this.dropdownMap = !this.dropdownMap;
-    this.changeFilter();
+    if (change) {
+      this.changeFilter();
+    }
   }
 
-  toggleDropdownTeam() {
-    console.log('toggleDropdownTeam');
+  toggleDropdownTeam(value: boolean, change: boolean) {
+    this.dropdownTeam = value;
 
-    this.dropdownTeam = !this.dropdownTeam;
-    this.changeFilter();
+    if (change) {
+      this.changeFilter();
+    }
   }
 }

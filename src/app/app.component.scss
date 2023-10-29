@@ -30,20 +30,9 @@
   }
 }
 
-.terrorist,
-.counter-terrorist {
-  .pin {
-    &.active {
-      background: rgba(22, 163, 74, 0.5);
-      .content {
-        background: #16a34a;
-      }
-    }
-  }
-}
-
 .zoom-img {
   &:hover {
     zoom: 200%;
   }
 }
+
