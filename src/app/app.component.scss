@@ -1,33 +1,37 @@
-.terrorist {
-  .pin {
-    background: rgba(229, 199, 145, 0.5);
-    .content {
-      background: rgba(229, 199, 145, 0.8);
-    }
+// .terrorist {
+//   .pin {
+//     background: rgba(229, 199, 145, 0.5);
+//     .content {
+//       background: rgba(229, 199, 145, 0.8);
+//     }
 
-    &:hover {
-      background: rgba(229, 199, 145, 0.8);
-      .content {
-        background: rgba(229, 199, 145, 1);
-      }
-    }
-  }
-}
+//     &:hover {
+//       background: rgba(229, 199, 145, 0.8);
+//       .content {
+//         background: rgba(229, 199, 145, 1);
+//       }
+//     }
+//   }
+// }
 
-.counter-terrorist {
-  .pin {
-    background: rgba(121, 161, 229, 0.5);
-    .content {
-      background: rgba(121, 161, 229, 0.8);
-    }
+// .counter-terrorist {
+//   .pin {
+//     background: rgba(121, 161, 229, 0.5);
+//     .content {
+//       background: rgba(121, 161, 229, 0.8);
+//     }
 
-    &:hover {
-      background: rgba(121, 161, 229, 0.8);
-      .content {
-        background: rgba(121, 161, 229, 1);
-      }
-    }
-  }
+//     &:hover {
+//       background: rgba(121, 161, 229, 0.8);
+//       .content {
+//         background: rgba(121, 161, 229, 1);
+//       }
+//     }
+//   }
+// }
+
+.pin-active {
+  
 }
 
 .zoom-img {

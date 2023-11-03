@@ -49,6 +49,62 @@ export const Maps: any[] = [
             keys: []
           },
         ]
+      },
+      {
+        id: 3,
+        x: 46,
+        y: 41,
+        name: "Smoke liga",
+        team: "counter-terrorist",
+        bombs: [
+          {
+            id: 0,
+            name: "Smoke liga 1",
+            keys: []
+          },
+        ]
+      },
+      {
+        id: 4,
+        x: 63,
+        y: 71,
+        name: "Smoke palacio",
+        team: "counter-terrorist",
+        bombs: [
+          {
+            id: 0,
+            name: "Smoke palacio 1",
+            keys: []
+          },
+        ]
+      },
+      {
+        id: 5,
+        x: 40,
+        y: 76,
+        name: "Smoke ct",
+        team: "terrorist",
+        bombs: [
+          {
+            id: 0,
+            name: "Smoke ct 1",
+            keys: []
+          },
+        ]
+      },
+      {
+        id: 6,
+        x: 45,
+        y: 59,
+        name: "Smoke jungle",
+        team: "terrorist",
+        bombs: [
+          {
+            id: 0,
+            name: "Smoke jungle 1",
+            keys: []
+          },
+        ]
       }
     ]
   }

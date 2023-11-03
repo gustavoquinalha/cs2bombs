@@ -60,7 +60,9 @@
             <div *ngIf="map.name === filter.map">
               <div *ngFor="let bomb of map[filter.bomb]">
                 <div *ngIf="bomb.team === filter.team">
-                  <div class="w-10 h-10 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all" (click)="selecionaSlot($event, bomb, 0)" [ngClass]="{ '!bg-nosferatu-500/50': bomb.id === selecao.bomb }" [ngStyle]="{ 'top.%': bomb.y, 'left.%': bomb.x }" [title]="bomb.name"></div>
+                  <div class="w-10 h-10 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all" (click)="selecionaSlot($event, bomb, 0)" [ngClass]="{ 'pin-active !bg-blade/50 !scale-125': bomb.id === selecao.bomb, 'bg-morbius-200/50' : bomb.team === 'terrorist' , 'bg-vonCount-300/50' : bomb.team === 'counter-terrorist' }" [ngStyle]="{ 'top.%': bomb.y, 'left.%': bomb.x }" [title]="bomb.name">
+                    <div class="w-5 h-5 rounded-full transition-all" [ngClass]="{ '!bg-blade': bomb.id === selecao.bomb, 'bg-morbius-200/80' : bomb.team === 'terrorist' , 'bg-vonCount-300/80' : bomb.team === 'counter-terrorist' }"></div>
+                  </div>
                 </div>
               </div>
             </div>
