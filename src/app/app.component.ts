@@ -73,6 +73,7 @@ export class AppComponent {
     bomb: 'smoke',
     search: ''
   }
+  mapa?: any[] = Maps;
 
   maps?: any[] = [];
 
@@ -86,6 +87,24 @@ export class AppComponent {
   dropdownMap = false;
   dropdownTeam = false;
 
+  selecao: any = {
+    bomb: null,
+    slot: null
+  }
+
+  selecionaSlot(event: any, bomb: any, idSlot: number) {
+    if (event) {
+      event.stopPropagation()
+    }
+
+    this.selecao = {
+      bomb: bomb.id,
+      slot: idSlot,
+    };
+
+    this.selectedBomb = bomb;
+  }
+
   ngOnInit() {
     this.maps = Maps;
     this.changeFilter();
@@ -96,41 +115,24 @@ export class AppComponent {
     this.reset();
   }
 
-  selectBomb(event: any, group: any) {
-    if (event) {
-      event.stopPropagation()
-    }
-
-    this.selectedBomb = {
-      id: group.id,
-      group: group,
-    }
-  }
-
   prevPixel() {
-    this.selectedBomb.id = this.selectedBomb.id - 1;
+    this.selecao.slot = this.selecao.slot - 1;
   }
 
   nextPixel() {
-    this.selectedBomb.id = this.selectedBomb.id + 1;
+    this.selecao.slot = this.selecao.slot + 1;
   }
 
-  setPixel(bombId: number) {
-    this.selectedBomb.id = bombId;
-  }
-
-  changeBomb(name: string) {
-    this.config.bombs.forEach(bomb => {
-      bomb.checked = false;
-    });
-
-    this.filter.bomb = name;
+  setPixel(group: any) {
+    this.selecao.slot = group.id;
   }
 
   reset() {
-    this.selectedBomb = {
-      id: null,
-      group: null,
+    this.selectedBomb = null;
+
+    this.selecao = {
+      bomb: null,
+      slot: null,
     }
   }
 

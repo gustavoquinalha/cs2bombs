@@ -32,7 +32,6 @@
 
 .zoom-img {
   &:hover {
-    zoom: 200%;
+    transform: scale(2.5);
   }
 }
-

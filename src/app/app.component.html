@@ -53,24 +53,26 @@
   </div>
 
   <div class="w-full pt-4">
-    <div class="flex lg:grid lg:flex-row flex-col w-full gap-4 grid-cols-4" *ngIf="filter.map">
-      <div class="relative mx-auto aspect-square col-span-3">
-        <div *ngFor="let bombs of filteredBombs" [ngClass]="filter.team">
-          <ng-container *ngFor="let group of bombs[filter.bomb]">
-            <ng-container *ngIf="filter.team === group.team">
-              <div class="w-10 h-10 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all" (click)="selectBomb($event, group)" [ngClass]="{ '!bg-nosferatu-500/50': selectedBomb.id === group.id }" [ngStyle]="{ 'top.%': group.y, 'left.%': group.x }" [title]="group.name">
-                <div *ngIf="group.bombs?.length > 1" class="w-5 h-5 bg-marcelin-500 text-white text-xs font-black rounded-full absolute bottom-6 left-6 flex justify-center items-center text-center shadow z-30">
-                  {{ group.bombs?.length }}
+    <div class="flex lg:grid lg:flex-row flex-col w-full gap-4 grid-cols-4 items-start" *ngIf="filter.map">
+      <div class="relative mx-auto aspect-square col-span-3" (click)="reset()">
+        <ng-container *ngIf="mapa">
+          <div *ngFor="let map of mapa" [ngClass]="filter.team">
+            <div *ngIf="map.name === filter.map">
+              <div *ngFor="let bomb of map[filter.bomb]">
+                <div *ngIf="bomb.team === filter.team">
+                  <div class="w-10 h-10 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all" (click)="selecionaSlot($event, bomb, 0)" [ngClass]="{ '!bg-nosferatu-500/50': bomb.id === selecao.bomb }" [ngStyle]="{ 'top.%': bomb.y, 'left.%': bomb.x }" [title]="bomb.name"></div>
                 </div>
-                <div class="content relative w-5 h-5 rounded-full z-20 justify-center font-bold items-center flex transition-all" [ngClass]="{ '!bg-nosferatu-400': selectedBomb.id === group.id }"></div>
               </div>
-            </ng-container>
-          </ng-container>
-        </div>
+            </div>
+          </div>
+        </ng-container>
+
         <img src="assets/img/maps/{{ filter.map }}/map.png" alt="image" class="w-full" />
       </div>
 
-      <div class="flex flex-col gap-4 col-span-1" [ngClass]="{ 'pointer-events-none opacity-50': selectedBomb.id === null }">
+      <div *ngIf="selecao.bomb === null" class="w-full p-4 flex items-center justify-center text-center text-nosferatu-200 text-sm">Selecione uma utilitária no mapa para visualizar o pixel</div>
+
+      <div *ngIf="selecao.bomb !== null" class="flex flex-col gap-4 col-span-1">
         <div class="flex gap-2">
           <button class="w-full transition-all px-4 h-10 bg-nosferatu-800 hover:bg-nosferatu-700 text-nosferatu-300 flex gap-2 justify-center items-center text-center rounded-md shadow outline-none">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -87,23 +89,23 @@
         </div>
 
         <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden w-full relative aspect-square">
-          <div class="flex justify-end items-center w-full gap-2 absolute right-2 top-2">
-            <div class="bg-nosferatu-800 text-nosferatu-300 font-medium shadow-sm px-2 py-1 rounded text-xs uppercase" *ngFor="let key of selectedBomb?.group?.bombs[this.selectedBomb.id]?.keys">
+          <div class="flex justify-end items-center w-full gap-2 absolute right-2 top-2 z-10">
+            <div class="bg-nosferatu-800 text-nosferatu-300 font-medium shadow-sm px-2 py-1 rounded text-xs uppercase" *ngFor="let key of selectedBomb?.bombs[this.selecao.bomb]?.keys">
               {{ key }}
             </div>
           </div>
-          <!--<img src="assets/img/maps/{{ filter.map }}/{{ selectedBomb?.group?.id }}/{{ selectedBomb?.id }}/position.jpg" alt="image" class="aspect-square transition-all zoom-img" />-->
+          <img *ngIf="selecao.bomb !== null" src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/position.jpg" alt="image" class="object-cover h-full transition-all zoom-img" />
         </div>
 
         <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden w-full relative aspect-square">
-          <!-- <img src="assets/img/maps/{{ filter.map }}/{{ selectedBomb?.group?.id }}/{{ selectedBomb?.id }}/pixel.jpg" alt="image" class="aspect-square transition-all zoom-img" />-->
+          <img *ngIf="selecao.bomb !== null" src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/pixel.jpg" alt="image" class="object-cover h-full transition-all zoom-img" />
         </div>
 
-        <div class="flex justify-center items-center h-8">
+        <div class="flex justify-center items-center h-8" *ngIf="selecao.bomb !== null">
           <div
             class="text-nosferatu-800 hover:text-nosferatu-600 cursor-pointer transition-colors"
             [ngClass]="{
-              'pointer-events-none opacity-20': selectedBomb?.id === 0
+              'pointer-events-none opacity-20': selecao?.slot <= 0
             }"
             (click)="prevPixel()"
           >
@@ -116,11 +118,11 @@
           </div>
 
           <div class="gap-2 flex justify-center items-center w-full">
-            <ng-container *ngFor="let bomb of selectedBomb?.group?.bombs">
+            <ng-container *ngFor="let bomb of selectedBomb?.bombs">
               <div
-                (click)="setPixel(bomb.id)"
+                (click)="setPixel(bomb)"
                 [ngClass]="{
-                  '!bg-nosferatu-600': this.selectedBomb.id === bomb.id
+                  '!bg-nosferatu-600': this.selecao.slot === bomb.id
                 }"
                 class="w-4 h-4 rounded-full z-20 bg-nosferatu-800 hover:bg-nosferatu-600/80 content-pin cursor-pointer transition-colors"
               ></div>
@@ -130,7 +132,7 @@
           <div
             class="text-nosferatu-800 hover:text-nosferatu-600 cursor-pointer transition-colors"
             [ngClass]="{
-              'pointer-events-none opacity-20': selectedBomb?.id >= selectedBomb?.group?.bombs?.length - 1
+              'pointer-events-none opacity-20': selecao?.slot >= selectedBomb?.bombs?.length - 1
             }"
             (click)="nextPixel()"
           >
