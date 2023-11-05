@@ -60,8 +60,8 @@
             <div *ngIf="map.name === filter.map">
               <div *ngFor="let bomb of map[filter.bomb]">
                 <div *ngIf="bomb.team === filter.team">
-                  <div class="w-10 h-10 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all" (click)="selecionaSlot($event, bomb, 0)" [ngClass]="{ 'pin-active !bg-blade/50 !scale-125': bomb.id === selecao.bomb, 'bg-morbius-200/50' : bomb.team === 'terrorist' , 'bg-vonCount-300/50' : bomb.team === 'counter-terrorist' }" [ngStyle]="{ 'top.%': bomb.y, 'left.%': bomb.x }" [title]="bomb.name">
-                    <div class="w-5 h-5 rounded-full transition-all" [ngClass]="{ '!bg-blade': bomb.id === selecao.bomb, 'bg-morbius-200/80' : bomb.team === 'terrorist' , 'bg-vonCount-300/80' : bomb.team === 'counter-terrorist' }"></div>
+                  <div class="w-10 h-10 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all" (click)="selecionaSlot($event, bomb, 0)" [ngClass]="{ 'pin-active !bg-aro-100/50 !scale-125': bomb.id === selecao.bomb, 'bg-morbius-200/50' : bomb.team === 'terrorist' , 'bg-vonCount-500/50' : bomb.team === 'counter-terrorist' }" [ngStyle]="{ 'top.%': bomb.y, 'left.%': bomb.x }" [title]="bomb.name">
+                    <div class="w-5 h-5 rounded-full transition-all" [ngClass]="{ '!bg-aro-100': bomb.id === selecao.bomb, 'bg-morbius-200/80' : bomb.team === 'terrorist' , 'bg-vonCount-600/90' : bomb.team === 'counter-terrorist' }"></div>
                   </div>
                 </div>
               </div>
@@ -75,6 +75,7 @@
       <div *ngIf="selecao.bomb === null" class="w-full p-4 flex items-center justify-center text-center text-nosferatu-200 text-sm">Selecione uma utilitária no mapa para visualizar o pixel</div>
 
       <div *ngIf="selecao.bomb !== null" class="flex flex-col gap-4 col-span-1">
+        <span class="text-center text-nosferatu-200 text-sm">{{selectedBomb?.bombs[selecao.slot]?.name}}</span>
         <div class="flex gap-2">
           <button class="w-full transition-all px-4 h-10 bg-nosferatu-800 hover:bg-nosferatu-700 text-nosferatu-300 flex gap-2 justify-center items-center text-center rounded-md shadow outline-none">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
