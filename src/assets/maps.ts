@@ -5,8 +5,8 @@ export const Maps: any[] = [
     smoke: [
       {
         id: 0,
-        x: 35,
-        y: 36,
+        x: 34,
+        y: 40,
         name: "Smoke janela",
         team: "terrorist",
         bombs: [
@@ -25,7 +25,7 @@ export const Maps: any[] = [
       {
         id: 1,
         x: 50,
-        y: 58,
+        y: 68,
         name: "Smoke cabecinha",
         team: "terrorist",
         bombs: [
@@ -81,7 +81,7 @@ export const Maps: any[] = [
       {
         id: 5,
         x: 40,
-        y: 76,
+        y: 89,
         name: "Smoke ct",
         team: "terrorist",
         bombs: [
@@ -95,7 +95,7 @@ export const Maps: any[] = [
       {
         id: 6,
         x: 45,
-        y: 59,
+        y: 69,
         name: "Smoke jungle",
         team: "terrorist",
         bombs: [

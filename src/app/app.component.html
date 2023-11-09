@@ -1,30 +1,53 @@
-<div class="p-4 flex gap-4 flex-col w-full max-w-7xl mx-auto" *ngIf="filter">
+<div class="p-4 flex gap-4 flex-col w-full max-w-7xl mx-auto"
+     *ngIf="filter">
   <div class="sticky top-0 left-0 shadow w-full p-4 rounded-md bg-nosferatu-900 z-50">
     <div class="flex md:flex-row flex-col items-center justify-center gap-4 w-full">
-      <h1 class="text-nosferatu-100 font-bold text-2xl hidden md:block">CS2BOMBS</h1>
+      <h1 class="text-white font-bold text-2xl hidden md:block">CS2BOMBS</h1>
 
       <div class="w-full flex flex-wrap md:flex-nowrap items-center justify-center gap-4">
         <div class="relative basis-48 flex-1">
-          <div class="bg-nosferatu-800 rounded-lg h-10 uppercase text-xs font-black text-nosferatu-100 whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate" (click)="toggleDropdownMap(true, false)">{{ filter.map }}</div>
-          <div class="fixed left-0 top-0 w-screen h-screen z-10" *ngIf="dropdownMap" (click)="toggleDropdownMap(false, false)"></div>
-          <div class="flex flex-col gap-2 absolute z-30 top-10 left-0 bg-nosferatu-800 shadow-lg rounded-lg p-2 mt-1 w-full" *ngIf="dropdownMap">
+          <div class="bg-nosferatu-800 rounded-lg h-10 uppercase text-xs font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate"
+               (click)="toggleDropdownMap(true, false)">{{ filter.map }}</div>
+          <div class="fixed left-0 top-0 w-screen h-screen z-10"
+               *ngIf="dropdownMap"
+               (click)="toggleDropdownMap(false, false)"></div>
+          <div class="flex flex-col gap-2 absolute z-30 top-10 left-0 bg-nosferatu-800 shadow-lg rounded-lg p-2 mt-1 w-full"
+               *ngIf="dropdownMap">
             <ng-container *ngFor="let map of config.maps">
-              <label [for]="map.name" class="flex items-center justify-center text-left px-3 overflow-hidden rounded-lg whitespace-nowrap h-10 hover:bg-nosferatu-700/50 cursor-pointer text-nosferatu-100" [ngClass]="{ '!bg-nosferatu-700 ': map.name === filter.map }">
-                <input type="radio" class="hidden" [id]="map.name" [(ngModel)]="filter.map" (ngModelChange)="toggleDropdownMap(false, true)" [value]="map.name" />
-                <span class="uppercase text-xs font-black m-0 p-0 block w-full truncate">{{ map.name }}</span>
+              <label [for]="map.name"
+                     class="flex items-center justify-center text-left px-3 overflow-hidden rounded-lg whitespace-nowrap h-10 hover:bg-nosferatu-700/50 cursor-pointer text-white"
+                     [ngClass]="{ '!bg-nosferatu-700 ': map.name === filter.map }">
+                <input type="radio"
+                       class="hidden"
+                       [id]="map.name"
+                       [(ngModel)]="filter.map"
+                       (ngModelChange)="toggleDropdownMap(false, true)"
+                       [value]="map.name" />
+                <span class="uppercase text-xs font-medium m-0 p-0 block w-full truncate">{{ map.name }}</span>
               </label>
             </ng-container>
           </div>
         </div>
 
         <div class="relative basis-48 flex-1">
-          <div class="bg-nosferatu-800 rounded-lg h-10 uppercase text-xs font-black text-nosferatu-100 whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate" (click)="toggleDropdownTeam(true, false)">{{ filter.team }}</div>
-          <div class="fixed left-0 top-0 w-screen h-screen z-10" *ngIf="dropdownTeam" (click)="toggleDropdownTeam(false, false)"></div>
-          <div class="flex flex-col gap-2 absolute z-30 top-10 left-0 bg-nosferatu-800 shadow-lg rounded-lg p-2 mt-1 w-full" *ngIf="dropdownTeam">
+          <div class="bg-nosferatu-800 rounded-lg h-10 uppercase text-xs font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate"
+               (click)="toggleDropdownTeam(true, false)">{{ filter.team }}</div>
+          <div class="fixed left-0 top-0 w-screen h-screen z-10"
+               *ngIf="dropdownTeam"
+               (click)="toggleDropdownTeam(false, false)"></div>
+          <div class="flex flex-col gap-2 absolute z-30 top-10 left-0 bg-nosferatu-800 shadow-lg rounded-lg p-2 mt-1 w-full"
+               *ngIf="dropdownTeam">
             <ng-container *ngFor="let team of config.teams">
-              <label [for]="team.name" class="flex items-center justify-center text-left px-3 overflow-hidden rounded-lg whitespace-nowrap h-10 hover:bg-nosferatu-700/50 cursor-pointer text-nosferatu-100" [ngClass]="{ '!bg-nosferatu-700 ': team.name === filter.team }">
-                <input type="radio" class="hidden" [id]="team.name" [(ngModel)]="filter.team" (ngModelChange)="toggleDropdownTeam(false, true)" [value]="team.name" />
-                <span class="uppercase text-xs font-black m-0 p-0 block w-full truncate">{{ team.name }}</span>
+              <label [for]="team.name"
+                     class="flex items-center justify-center text-left px-3 overflow-hidden rounded-lg whitespace-nowrap h-10 hover:bg-nosferatu-700/50 cursor-pointer text-white"
+                     [ngClass]="{ '!bg-nosferatu-700 ': team.name === filter.team }">
+                <input type="radio"
+                       class="hidden"
+                       [id]="team.name"
+                       [(ngModel)]="filter.team"
+                       (ngModelChange)="toggleDropdownTeam(false, true)"
+                       [value]="team.name" />
+                <span class="uppercase text-xs font-medium m-0 p-0 block w-full truncate">{{ team.name }}</span>
               </label>
             </ng-container>
           </div>
@@ -32,36 +55,76 @@
 
         <div class="flex gap-2 basis-24 flex-1">
           <ng-container *ngFor="let bomb of config.bombs">
-            <label [for]="bomb.name" class="flex items-center justify-center text-center p-2 overflow-hidden rounded-lg w-10 h-10 hover:bg-nosferatu-800/50 cursor-pointer" [ngClass]="{ '!bg-nosferatu-800 shadow': bomb.name === filter.bomb }">
-              <input type="radio" class="hidden" [id]="bomb.name" [(ngModel)]="filter.bomb" [value]="bomb.name" />
-              <img src="assets/img/bombs/{{ bomb.name }}.svg" alt="image" class="h-6" />
+            <label [for]="bomb.name"
+                   class="flex items-center justify-center text-center p-2 overflow-hidden rounded-lg w-10 h-10 hover:bg-nosferatu-800/50 cursor-pointer text-white"
+                   [ngClass]="{ '!bg-nosferatu-800 shadow': bomb.name === filter.bomb }">
+              <input type="radio"
+                     class="hidden"
+                     [id]="bomb.name"
+                     [(ngModel)]="filter.bomb"
+                     [value]="bomb.name" />
+              <img src="assets/img/bombs/{{ bomb.name }}.svg"
+                   alt="image"
+                   class="h-6" />
             </label>
           </ng-container>
         </div>
 
         <div class="relative basis-48 flex-1 hidden md:block">
           <span class="w-10 h-10 flex justify-center items-center text-center absolute">
-            <svg width="24" height="24" xmlns="http://www.w3.org/2b5bad6/svg" viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="6.5" fill="none" stroke="#b5bad6" />
-              <line x1="20.4" y1="20.5" x2="15.5" y2="15.7" fill="none" stroke="#b5bad6" />
+            <svg width="24"
+                 height="24"
+                 xmlns="http://www.w3.org/2b5bad6/svg"
+                 viewBox="0 0 24 24">
+              <circle cx="11"
+                      cy="11"
+                      r="6.5"
+                      fill="none"
+                      stroke="#b5bad6" />
+              <line x1="20.4"
+                    y1="20.5"
+                    x2="15.5"
+                    y2="15.7"
+                    fill="none"
+                    stroke="#b5bad6" />
             </svg>
           </span>
-          <input type="text" id="search" [(ngModel)]="filter.search" (ngModelChange)="changeFilter()" class="bg-nosferatu-800 rounded-lg h-10 uppercase text-xs font-black text-nosferatu-100 whitespace-nowrap pl-10 pr-3 flex justify-start items-center outline-none shadow w-full text-left truncate" placeholder="Pesquisar..." />
+          <input type="text"
+                 id="search"
+                 [(ngModel)]="filter.search"
+                 (ngModelChange)="changeFilter()"
+                 class="bg-nosferatu-800 rounded-lg h-10 uppercase text-xs font-medium text-white whitespace-nowrap pl-10 pr-3 flex justify-start items-center outline-none shadow w-full text-left truncate"
+                 placeholder="Pesquisar..." />
         </div>
       </div>
     </div>
   </div>
 
   <div class="w-full pt-4">
-    <div class="flex lg:grid lg:flex-row flex-col w-full gap-4 grid-cols-4 items-start" *ngIf="filter.map">
-      <div class="relative mx-auto aspect-square col-span-3" (click)="reset()">
+    <div class="flex lg:flex-row flex-col w-full gap-4 items-start justify-center"
+         *ngIf="filter.map">
+      <div class="relative w-full max-w-4xl"
+           (click)="reset()">
+        <!-- aspect-square -->
         <ng-container *ngIf="mapa">
-          <div *ngFor="let map of mapa" [ngClass]="filter.team">
+          <div *ngFor="let map of mapa"
+               [ngClass]="filter.team">
             <div *ngIf="map.name === filter.map">
               <div *ngFor="let bomb of map[filter.bomb]">
                 <div *ngIf="bomb.team === filter.team">
-                  <div class="w-10 h-10 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all" (click)="selecionaSlot($event, bomb, 0)" [ngClass]="{ 'pin-active !bg-aro-100/50 !scale-125': bomb.id === selecao.bomb, 'bg-morbius-200/50' : bomb.team === 'terrorist' , 'bg-vonCount-500/50' : bomb.team === 'counter-terrorist' }" [ngStyle]="{ 'top.%': bomb.y, 'left.%': bomb.x }" [title]="bomb.name">
-                    <div class="w-5 h-5 rounded-full transition-all" [ngClass]="{ '!bg-aro-100': bomb.id === selecao.bomb, 'bg-morbius-200/80' : bomb.team === 'terrorist' , 'bg-vonCount-600/90' : bomb.team === 'counter-terrorist' }"></div>
+                  <div class="w-12 h-12 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all"
+                       (click)="selecionaSlot($event, bomb, 0)"
+                       [ngClass]="{
+                    'pin-active !bg-white/40 !scale-110': bomb.id === selecao.bomb,
+                    'bg-morbius-200/40' : bomb.team === 'terrorist',
+                    'bg-blue-400/40' : bomb.team === 'counter-terrorist' }"
+                       [ngStyle]="{ 'left.%': bomb.x, 'top.%': bomb.y }"
+                       [title]="bomb.name">
+                    <div class="w-4 h-4 rounded-full transition-all"
+                         [ngClass]="{
+                      '!bg-white': bomb.id === selecao.bomb,
+                      'bg-morbius-200/80' : bomb.team === 'terrorist',
+                      'bg-blue-400' : bomb.team === 'counter-terrorist' }"></div>
                   </div>
                 </div>
               </div>
@@ -69,81 +132,143 @@
           </div>
         </ng-container>
 
-        <img src="assets/img/maps/{{ filter.map }}/map.png" alt="image" class="w-full" />
+        <img src="assets/img/maps/{{ filter.map }}/map.svg"
+             alt="image"
+             class="w-full" />
       </div>
 
-      <div *ngIf="selecao.bomb === null" class="w-full p-4 flex items-center justify-center text-center text-nosferatu-200 text-sm">Selecione uma utilitária no mapa para visualizar o pixel</div>
+      <!-- <div *ngIf="selecao.bomb === null" class="w-full p-4 flex items-center justify-center text-center text-nosferatu-200 text-sm">Selecione uma utilitária no mapa para visualizar o pixel</div> -->
 
-      <div *ngIf="selecao.bomb !== null" class="flex flex-col gap-4 col-span-1">
-        <!-- <span class="text-center text-nosferatu-200 text-sm">{{selectedBomb?.bombs[selecao.slot]?.name}}</span> -->
+      <div *ngIf="selecao.bomb !== null"
+           class="flex flex-col gap-4">
+
         <div class="flex gap-2">
-          <button class="w-full transition-all px-4 h-10 bg-nosferatu-800 hover:bg-nosferatu-700 text-nosferatu-300 flex gap-2 justify-center items-center text-center rounded-md shadow outline-none">
-            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button class="w-full transition-all px-4 h-10 bg-nosferatu-800 hover:bg-nosferatu-700 text-white flex gap-2 justify-center items-center text-center rounded-md shadow outline-none">
+            <svg class="h-4 w-4"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
             <span>Ver vídeo</span>
           </button>
-          <button (click)="reset()" class="w-10 h-10 text-lg transition-all bg-nosferatu-800 hover:bg-nosferatu-700 text-nosferatu-300 flex justify-center items-center text-center rounded-md shadow outline-none" style="min-width: 40px">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <line x1="19" y1="5" x2="5" y2="19" stroke="#888fb8" stroke-miterlimit="10" />
-              <line x1="5" y1="5" x2="19" y2="19" stroke="#888fb8" stroke-miterlimit="10" />
+          <button (click)="reset()"
+                  class="w-10 h-10 text-lg transition-all bg-nosferatu-800 hover:bg-nosferatu-700 text-white flex justify-center items-center text-center rounded-md shadow outline-none"
+                  style="min-width: 40px">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="24"
+                 height="24"
+                 viewBox="0 0 24 24"
+                 stroke-width="2"
+                 stroke="currentColor">
+              <line x1="19"
+                    y1="5"
+                    x2="5"
+                    y2="19"
+                    stroke-miterlimit="10" />
+              <line x1="5"
+                    y1="5"
+                    x2="19"
+                    y2="19"
+                    stroke-miterlimit="10" />
             </svg>
           </button>
         </div>
 
-        <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden w-full relative aspect-square">
+        <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden w-72 h-72 relative">
           <div class="flex justify-end items-center w-full gap-2 absolute right-2 top-2 z-10">
-            <div class="bg-nosferatu-800 text-nosferatu-300 font-medium shadow-sm px-2 py-1 rounded text-xs uppercase" *ngFor="let key of selectedBomb?.bombs[this.selecao.bomb]?.keys">
+            <div class="bg-nosferatu-800 text-nosferatu-300 font-medium shadow-sm px-2 py-1 rounded text-xs uppercase"
+                 *ngFor="let key of selectedBomb?.bombs[this.selecao.bomb]?.keys">
               {{ key }}
             </div>
           </div>
-          <img *ngIf="selecao.bomb !== null" src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/position.jpg" alt="image" class="object-cover h-full transition-all zoom-img" />
+          <img *ngIf="selecao.bomb !== null"
+               src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/position.jpg"
+               alt="image"
+               class="object-cover h-full transition-all zoom-img" />
         </div>
 
-        <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden w-full relative aspect-square">
-          <img *ngIf="selecao.bomb !== null" src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/pixel.jpg" alt="image" class="object-cover h-full transition-all zoom-img" />
+        <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden w-72 h-72 relative">
+          <img *ngIf="selecao.bomb !== null"
+               src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/pixel.jpg"
+               alt="image"
+               class="object-cover h-full transition-all zoom-img" />
         </div>
 
-        <div class="flex justify-center items-center h-8" *ngIf="selecao.bomb !== null">
-          <div
-            class="text-nosferatu-800 hover:text-nosferatu-600 cursor-pointer transition-colors"
-            [ngClass]="{
+        <div class="flex justify-center items-center h-8"
+             *ngIf="selecao.bomb !== null">
+          <div class="text-nosferatu-600 hover:text-nosferatu-500 cursor-pointer transition-colors"
+               [ngClass]="{
               'pointer-events-none opacity-20': selecao?.slot <= 0
             }"
-            (click)="prevPixel()"
-          >
-            <svg class="h-8 w-8" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <line x1="5" y1="12" x2="9" y2="16" />
-              <line x1="5" y1="12" x2="9" y2="8" />
+               (click)="prevPixel()">
+            <svg class="h-8 w-8"
+                 width="24"
+                 height="24"
+                 viewBox="0 0 24 24"
+                 stroke-width="2"
+                 stroke="currentColor"
+                 fill="none"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path stroke="none"
+                    d="M0 0h24v24H0z" />
+              <line x1="5"
+                    y1="12"
+                    x2="19"
+                    y2="12" />
+              <line x1="5"
+                    y1="12"
+                    x2="9"
+                    y2="16" />
+              <line x1="5"
+                    y1="12"
+                    x2="9"
+                    y2="8" />
             </svg>
           </div>
 
           <div class="gap-2 flex justify-center items-center w-full">
             <ng-container *ngFor="let bomb of selectedBomb?.bombs">
-              <div
-                (click)="setPixel(bomb)"
-                [ngClass]="{
-                  '!bg-nosferatu-600': this.selecao.slot === bomb.id
+              <div (click)="setPixel(bomb)"
+                   [ngClass]="{
+                  '!bg-nosferatu-600 !scale-110': this.selecao.slot === bomb.id
                 }"
-                class="w-4 h-4 rounded-full z-20 bg-nosferatu-800 hover:bg-nosferatu-600/80 content-pin cursor-pointer transition-colors"
-              ></div>
+                   class="w-4 h-4 rounded-full z-20 bg-nosferatu-800 hover:bg-nosferatu-600/80 content-pin cursor-pointer transition-colors"></div>
             </ng-container>
           </div>
 
-          <div
-            class="text-nosferatu-800 hover:text-nosferatu-600 cursor-pointer transition-colors"
-            [ngClass]="{
+          <div class="text-nosferatu-600 hover:text-nosferatu-500 cursor-pointer transition-colors"
+               [ngClass]="{
               'pointer-events-none opacity-20': selecao?.slot >= selectedBomb?.bombs?.length - 1
             }"
-            (click)="nextPixel()"
-          >
-            <svg class="h-8 w-8" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <line x1="15" y1="16" x2="19" y2="12" />
-              <line x1="15" y1="8" x2="19" y2="12" />
+               (click)="nextPixel()">
+            <svg class="h-8 w-8"
+                 width="24"
+                 height="24"
+                 viewBox="0 0 24 24"
+                 stroke-width="2"
+                 stroke="currentColor"
+                 fill="none"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path stroke="none"
+                    d="M0 0h24v24H0z" />
+              <line x1="5"
+                    y1="12"
+                    x2="19"
+                    y2="12" />
+              <line x1="15"
+                    y1="16"
+                    x2="19"
+                    y2="12" />
+              <line x1="15"
+                    y1="8"
+                    x2="19"
+                    y2="12" />
             </svg>
           </div>
         </div>
