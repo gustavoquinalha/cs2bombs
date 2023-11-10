@@ -1,101 +1,108 @@
 <div class="p-4 flex gap-4 flex-col w-full max-w-7xl mx-auto"
      *ngIf="filter">
   <div class="sticky top-0 left-0 shadow w-full p-4 rounded-md bg-nosferatu-900 z-50">
-    <div class="flex md:flex-row flex-col items-center justify-center gap-4 w-full">
-      <h1 class="text-white font-bold text-2xl hidden md:block">CS2BOMBS</h1>
+    <div class="flex md:flex-row flex-col gap-4 w-full items-center justify-center">
+      <img src="assets/img/logo.svg"
+           alt="image"
+           class="h-4" />
 
-      <div class="w-full flex flex-wrap md:flex-nowrap items-center justify-center gap-4">
-        <div class="relative basis-48 flex-1">
-          <div class="bg-nosferatu-800 rounded-lg h-10 uppercase text-xs font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate"
-               (click)="toggleDropdownMap(true, false)">{{ filter.map }}</div>
-          <div class="fixed left-0 top-0 w-screen h-screen z-10"
-               *ngIf="dropdownMap"
-               (click)="toggleDropdownMap(false, false)"></div>
-          <div class="flex flex-col gap-2 absolute z-30 top-10 left-0 bg-nosferatu-800 shadow-lg rounded-lg p-2 mt-1 w-full"
-               *ngIf="dropdownMap">
-            <ng-container *ngFor="let map of config.maps">
-              <label [for]="map.name"
-                     class="flex items-center justify-center text-left px-3 overflow-hidden rounded-lg whitespace-nowrap h-10 hover:bg-nosferatu-700/50 cursor-pointer text-white"
-                     [ngClass]="{ '!bg-nosferatu-700 ': map.name === filter.map }">
-                <input type="radio"
-                       class="hidden"
-                       [id]="map.name"
-                       [(ngModel)]="filter.map"
-                       (ngModelChange)="toggleDropdownMap(false, true)"
-                       [value]="map.name" />
-                <span class="uppercase text-xs font-medium m-0 p-0 block w-full truncate">{{ map.name }}</span>
-              </label>
-            </ng-container>
-          </div>
-        </div>
+      <hr class="w-[1px] h-10 bg-dracula-darker-800 border-none hidden md:block">
 
-        <div class="relative basis-48 flex-1">
-          <div class="bg-nosferatu-800 rounded-lg h-10 uppercase text-xs font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate"
-               (click)="toggleDropdownTeam(true, false)">{{ filter.team }}</div>
-          <div class="fixed left-0 top-0 w-screen h-screen z-10"
-               *ngIf="dropdownTeam"
-               (click)="toggleDropdownTeam(false, false)"></div>
-          <div class="flex flex-col gap-2 absolute z-30 top-10 left-0 bg-nosferatu-800 shadow-lg rounded-lg p-2 mt-1 w-full"
-               *ngIf="dropdownTeam">
-            <ng-container *ngFor="let team of config.teams">
-              <label [for]="team.name"
-                     class="flex items-center justify-center text-left px-3 overflow-hidden rounded-lg whitespace-nowrap h-10 hover:bg-nosferatu-700/50 cursor-pointer text-white"
-                     [ngClass]="{ '!bg-nosferatu-700 ': team.name === filter.team }">
-                <input type="radio"
-                       class="hidden"
-                       [id]="team.name"
-                       [(ngModel)]="filter.team"
-                       (ngModelChange)="toggleDropdownTeam(false, true)"
-                       [value]="team.name" />
-                <span class="uppercase text-xs font-medium m-0 p-0 block w-full truncate">{{ team.name }}</span>
-              </label>
-            </ng-container>
-          </div>
-        </div>
-
-        <div class="flex gap-2 basis-24 flex-1">
-          <ng-container *ngFor="let bomb of config.bombs">
-            <label [for]="bomb.name"
-                   class="flex items-center justify-center text-center p-2 overflow-hidden rounded-lg w-10 h-10 hover:bg-nosferatu-800/50 cursor-pointer text-white"
-                   [ngClass]="{ '!bg-nosferatu-800 shadow': bomb.name === filter.bomb }">
+      <div class="relative md:basis-48 flex-1 w-full">
+        <div class="bg-nosferatu-800 rounded-lg h-10 capitalize text-xs font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate"
+             (click)="toggleDropdownMap(true, false)">{{ filter.map }}</div>
+        <div class="fixed left-0 top-0 w-screen h-screen z-10"
+             *ngIf="dropdownMap"
+             (click)="toggleDropdownMap(false, false)"></div>
+        <div class="flex flex-col gap-2 absolute z-30 top-10 left-0 bg-nosferatu-800 shadow-lg rounded-lg p-2 mt-1 w-full"
+             *ngIf="dropdownMap">
+          <ng-container *ngFor="let map of config.maps">
+            <label [for]="map.name"
+                   class="flex items-center justify-center text-left px-3 overflow-hidden rounded-lg whitespace-nowrap h-10 hover:bg-nosferatu-700/50 cursor-pointer text-white"
+                   [ngClass]="{ '!bg-nosferatu-700 ': map.name === filter.map }">
               <input type="radio"
                      class="hidden"
-                     [id]="bomb.name"
-                     [(ngModel)]="filter.bomb"
-                     [value]="bomb.name" />
-              <img src="assets/img/bombs/{{ bomb.name }}.svg"
-                   alt="image"
-                   class="h-6" />
+                     [id]="map.name"
+                     [(ngModel)]="filter.map"
+                     (ngModelChange)="toggleDropdownMap(false, true)"
+                     [value]="map.name" />
+              <span class="capitalize text-xs font-medium m-0 p-0 block w-full truncate">{{ map.name }}</span>
             </label>
           </ng-container>
         </div>
+      </div>
 
-        <div class="relative basis-48 flex-1 hidden md:block">
-          <span class="w-10 h-10 flex justify-center items-center text-center absolute">
-            <svg width="24"
-                 height="24"
-                 xmlns="http://www.w3.org/2b5bad6/svg"
-                 viewBox="0 0 24 24">
-              <circle cx="11"
-                      cy="11"
-                      r="6.5"
-                      fill="none"
-                      stroke="#b5bad6" />
-              <line x1="20.4"
-                    y1="20.5"
-                    x2="15.5"
-                    y2="15.7"
-                    fill="none"
-                    stroke="#b5bad6" />
-            </svg>
-          </span>
-          <input type="text"
-                 id="search"
-                 [(ngModel)]="filter.search"
-                 (ngModelChange)="changeFilter()"
-                 class="bg-nosferatu-800 rounded-lg h-10 uppercase text-xs font-medium text-white whitespace-nowrap pl-10 pr-3 flex justify-start items-center outline-none shadow w-full text-left truncate"
-                 placeholder="Pesquisar..." />
+      <hr class="w-[1px] h-10 bg-dracula-darker-800 border-none hidden md:block">
+
+      <div class="relative md:basis-48 flex-1 w-full">
+        <div class="bg-nosferatu-800 rounded-lg h-10 capitalize text-xs font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate"
+             (click)="toggleDropdownTeam(true, false)">{{ filter.team }}</div>
+        <div class="fixed left-0 top-0 w-screen h-screen z-10"
+             *ngIf="dropdownTeam"
+             (click)="toggleDropdownTeam(false, false)"></div>
+        <div class="flex flex-col gap-2 absolute z-30 top-10 left-0 bg-nosferatu-800 shadow-lg rounded-lg p-2 mt-1 w-full"
+             *ngIf="dropdownTeam">
+          <ng-container *ngFor="let team of config.teams">
+            <label [for]="team.name"
+                   class="flex items-center justify-center text-left px-3 overflow-hidden rounded-lg whitespace-nowrap h-10 hover:bg-nosferatu-700/50 cursor-pointer text-white"
+                   [ngClass]="{ '!bg-nosferatu-700 ': team.name === filter.team }">
+              <input type="radio"
+                     class="hidden"
+                     [id]="team.name"
+                     [(ngModel)]="filter.team"
+                     (ngModelChange)="toggleDropdownTeam(false, true)"
+                     [value]="team.name" />
+              <span class="capitalize text-xs font-medium m-0 p-0 block w-full truncate">{{ team.name }}</span>
+            </label>
+          </ng-container>
         </div>
+      </div>
+
+      <hr class="w-[1px] h-10 bg-dracula-darker-800 border-none hidden md:block">
+
+      <div class="flex gap-2 md:basis-24 flex-1 w-full">
+        <ng-container *ngFor="let bomb of config.bombs">
+          <label [for]="bomb.name"
+                 class="flex items-center justify-center text-center p-2 overflow-hidden rounded-lg w-10 h-10 hover:bg-nosferatu-800/50 cursor-pointer text-white"
+                 [ngClass]="{ '!bg-nosferatu-800 shadow': bomb.name === filter.bomb }">
+            <input type="radio"
+                   class="hidden"
+                   [id]="bomb.name"
+                   [(ngModel)]="filter.bomb"
+                   [value]="bomb.name" />
+            <img src="assets/img/bombs/{{ bomb.name }}.svg"
+                 alt="image"
+                 class="h-6" />
+          </label>
+        </ng-container>
+      </div>
+
+      <hr class="w-[1px] h-10 bg-dracula-darker-800 border-none hidden md:block">
+
+      <div class="relative md:basis-48 flex-1 hidden md:block w-full">
+        <span class="w-10 h-10 flex justify-center items-center text-center absolute">
+          <svg width="24"
+               height="24"
+               viewBox="0 0 24 24">
+            <circle cx="11"
+                    cy="11"
+                    r="6.5"
+                    fill="none"
+                    stroke="#fff" />
+            <line x1="20.4"
+                  y1="20.5"
+                  x2="15.5"
+                  y2="15.7"
+                  fill="none"
+                  stroke="#fff" />
+          </svg>
+        </span>
+        <input type="text"
+               id="search"
+               [(ngModel)]="filter.search"
+               (ngModelChange)="changeFilter()"
+               class="bg-nosferatu-800 rounded-lg h-10 text-xs font-medium text-white whitespace-nowrap pl-10 pr-3 flex justify-start items-center outline-none shadow w-full text-left truncate placeholder:text-white/50"
+               placeholder="Pesquisar..." />
       </div>
     </div>
   </div>
@@ -105,7 +112,6 @@
          *ngIf="filter.map">
       <div class="relative w-full max-w-4xl"
            (click)="reset()">
-        <!-- aspect-square -->
         <ng-container *ngIf="mapa">
           <div *ngFor="let map of mapa"
                [ngClass]="filter.team">
@@ -115,16 +121,18 @@
                   <div class="w-12 h-12 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all"
                        (click)="selecionaSlot($event, bomb, 0)"
                        [ngClass]="{
-                    'pin-active !bg-white/40 !scale-110': bomb.id === selecao.bomb,
-                    'bg-morbius-200/40' : bomb.team === 'terrorist',
-                    'bg-blue-400/40' : bomb.team === 'counter-terrorist' }"
+                      'pin-active !bg-white/40 !scale-110': bomb.id === selecao.bomb,
+                      'bg-tr/50': bomb.team === 'terrorist',
+                      'bg-ct/50': bomb.team === 'counter-terrorist'
+                    }"
                        [ngStyle]="{ 'left.%': bomb.x, 'top.%': bomb.y }"
                        [title]="bomb.name">
                     <div class="w-4 h-4 rounded-full transition-all"
                          [ngClass]="{
-                      '!bg-white': bomb.id === selecao.bomb,
-                      'bg-morbius-200/80' : bomb.team === 'terrorist',
-                      'bg-blue-400' : bomb.team === 'counter-terrorist' }"></div>
+                        '!bg-white w-5 h-5': bomb.id === selecao.bomb,
+                        'bg-tr': bomb.team === 'terrorist',
+                        'bg-ct': bomb.team === 'counter-terrorist'
+                      }"></div>
                   </div>
                 </div>
               </div>
@@ -132,7 +140,7 @@
           </div>
         </ng-container>
 
-        <img src="assets/img/maps/{{ filter.map }}/map.svg"
+        <img src="assets/img/maps/{{ filter.map }}/map.png"
              alt="image"
              class="w-full" />
       </div>
@@ -141,7 +149,6 @@
 
       <div *ngIf="selecao.bomb !== null"
            class="flex flex-col gap-4">
-
         <div class="flex gap-2">
           <button class="w-full transition-all px-4 h-10 bg-nosferatu-800 hover:bg-nosferatu-700 text-white flex gap-2 justify-center items-center text-center rounded-md shadow outline-none">
             <svg class="h-4 w-4"
@@ -180,7 +187,7 @@
 
         <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden w-72 h-72 relative">
           <div class="flex justify-end items-center w-full gap-2 absolute right-2 top-2 z-10">
-            <div class="bg-nosferatu-800 text-nosferatu-300 font-medium shadow-sm px-2 py-1 rounded text-xs uppercase"
+            <div class="bg-nosferatu-800 text-nosferatu-300 font-medium shadow-sm px-2 py-1 rounded text-xs capitalize"
                  *ngFor="let key of selectedBomb?.bombs[this.selecao.bomb]?.keys">
               {{ key }}
             </div>

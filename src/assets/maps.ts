@@ -1,4 +1,6 @@
-export const Maps: any[] = [
+import { Mapa } from "src/app/utils/maps";
+
+export const Maps: Mapa[] = [
   {
     id: 1,
     name: "mirage",
@@ -39,7 +41,7 @@ export const Maps: any[] = [
       {
         id: 2,
         x: 67,
-        y: 56.5,
+        y: 65,
         name: "Smoke Caverna",
         team: "counter-terrorist",
         bombs: [
@@ -53,7 +55,7 @@ export const Maps: any[] = [
       {
         id: 3,
         x: 46,
-        y: 41,
+        y: 46,
         name: "Smoke liga",
         team: "counter-terrorist",
         bombs: [
@@ -66,8 +68,8 @@ export const Maps: any[] = [
       },
       {
         id: 4,
-        x: 63,
-        y: 71,
+        x: 63.5,
+        y: 84,
         name: "Smoke palacio",
         team: "counter-terrorist",
         bombs: [
