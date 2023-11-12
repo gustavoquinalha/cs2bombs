@@ -1,16 +1,18 @@
-<div class="p-4 flex gap-4 flex-col w-full max-w-7xl mx-auto"
+<div class="sm:p-4 flex gap-4 flex-col w-full max-w-7xl mx-auto"
      *ngIf="filter">
-  <div class="sticky top-0 left-0 shadow w-full p-4 rounded-md bg-nosferatu-900 z-50">
-    <div class="flex md:flex-row flex-col gap-4 w-full items-center justify-center">
+  <div class="sticky top-0 left-0 shadow w-full p-2 sm:p-4 sm:rounded-md bg-nosferatu-900 z-50">
+    <div class="flex md:flex-row flex-col gap-2 sm:gap-4 w-full items-center justify-center">
       <img src="assets/img/logo.svg"
            alt="image"
-           class="h-4" />
+           class="w-full max-w-[150px] my-3" />
 
       <hr class="w-[1px] h-10 bg-dracula-darker-800 border-none hidden md:block">
 
       <div class="relative md:basis-48 flex-1 w-full">
         <div class="bg-nosferatu-800 rounded-lg h-10 capitalize text-xs font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate"
-             (click)="toggleDropdownMap(true, false)">{{ filter.map }}</div>
+             (click)="toggleDropdownMap(true, false)">
+          <span class="truncate w-full">{{ filter.map }}</span>
+        </div>
         <div class="fixed left-0 top-0 w-screen h-screen z-10"
              *ngIf="dropdownMap"
              (click)="toggleDropdownMap(false, false)"></div>
@@ -35,8 +37,10 @@
       <hr class="w-[1px] h-10 bg-dracula-darker-800 border-none hidden md:block">
 
       <div class="relative md:basis-48 flex-1 w-full">
-        <div class="bg-nosferatu-800 rounded-lg h-10 capitalize text-xs font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate"
-             (click)="toggleDropdownTeam(true, false)">{{ filter.team }}</div>
+        <div class="bg-nosferatu-800 rounded-lg h-10 capitalize text-xs font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer"
+             (click)="toggleDropdownTeam(true, false)">
+          <span class="truncate w-full">{{ filter.team }}</span>
+        </div>
         <div class="fixed left-0 top-0 w-screen h-screen z-10"
              *ngIf="dropdownTeam"
              (click)="toggleDropdownTeam(false, false)"></div>
@@ -63,7 +67,7 @@
       <div class="flex gap-2 md:basis-24 flex-1 w-full">
         <ng-container *ngFor="let bomb of config.bombs">
           <label [for]="bomb.name"
-                 class="flex items-center justify-center text-center p-2 overflow-hidden rounded-lg w-10 h-10 hover:bg-nosferatu-800/50 cursor-pointer text-white"
+                 class="flex items-center justify-center text-center p-2 overflow-hidden rounded-lg w-10 h-10 min-w-[2.5rem] hover:bg-nosferatu-800/50 cursor-pointer text-white"
                  [ngClass]="{ '!bg-nosferatu-800 shadow': bomb.name === filter.bomb }">
             <input type="radio"
                    class="hidden"
@@ -71,7 +75,8 @@
                    [(ngModel)]="filter.bomb"
                    [value]="bomb.name" />
             <img src="assets/img/bombs/{{ bomb.name }}.svg"
-                 alt="image"
+                 [alt]="bomb.name"
+                 [title]="bomb.name"
                  class="h-6" />
           </label>
         </ng-container>
@@ -79,7 +84,7 @@
 
       <hr class="w-[1px] h-10 bg-dracula-darker-800 border-none hidden md:block">
 
-      <div class="relative md:basis-48 flex-1 hidden md:block w-full">
+      <div class="relative md:basis-48 flex-1 hidden md:block w-full pointer-events-none select-none opacity-50">
         <span class="w-10 h-10 flex justify-center items-center text-center absolute">
           <svg width="24"
                height="24"
@@ -108,9 +113,10 @@
   </div>
 
   <div class="w-full pt-4">
-    <div class="flex lg:flex-row flex-col w-full gap-4 items-start justify-center"
+    <div class="w-full grid gap-4 items-start justify-center grid-cols-4 p-4 sm:p-0"
          *ngIf="filter.map">
-      <div class="relative w-full max-w-4xl"
+
+      <div class="relative col-span-4 lg:col-span-3"
            (click)="reset()">
         <ng-container *ngIf="mapa">
           <div *ngFor="let map of mapa"
@@ -118,7 +124,7 @@
             <div *ngIf="map.name === filter.map">
               <div *ngFor="let bomb of map[filter.bomb]">
                 <div *ngIf="bomb.team === filter.team">
-                  <div class="w-12 h-12 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all"
+                  <div class="w-5 h-5 sm:w-12 sm:h-12 hover:scale-110 rounded-full z-10 absolute flex justify-center items-center pin group cursor-pointer transition-all"
                        (click)="selecionaSlot($event, bomb, 0)"
                        [ngClass]="{
                       'pin-active !bg-white/40 !scale-110': bomb.id === selecao.bomb,
@@ -127,7 +133,7 @@
                     }"
                        [ngStyle]="{ 'left.%': bomb.x, 'top.%': bomb.y }"
                        [title]="bomb.name">
-                    <div class="w-4 h-4 rounded-full transition-all"
+                    <div class="w-2 h-2 sm:w-4 sm:h-4 rounded-full transition-all"
                          [ngClass]="{
                         '!bg-white w-5 h-5': bomb.id === selecao.bomb,
                         'bg-tr': bomb.team === 'terrorist',
@@ -145,12 +151,9 @@
              class="w-full" />
       </div>
 
-      <!-- <div *ngIf="selecao.bomb === null" class="w-full p-4 flex items-center justify-center text-center text-nosferatu-200 text-sm">Selecione uma utilitária no mapa para visualizar o pixel</div> -->
-
-      <div *ngIf="selecao.bomb !== null"
-           class="flex flex-col gap-4">
+      <div *ngIf="selecao.bomb !== null" class="flex flex-col gap-4 col-span-4 lg:col-span-1">
         <div class="flex gap-2">
-          <button class="w-full transition-all px-4 h-10 bg-nosferatu-800 hover:bg-nosferatu-700 text-white flex gap-2 justify-center items-center text-center rounded-md shadow outline-none">
+          <button class="pointer-events-none select-none opacity-50 w-full transition-all px-4 h-10 bg-nosferatu-800 hover:bg-nosferatu-700 text-white flex gap-2 justify-center items-center text-center rounded-md shadow outline-none">
             <svg class="h-4 w-4"
                  viewBox="0 0 24 24"
                  fill="none"
@@ -185,24 +188,26 @@
           </button>
         </div>
 
-        <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden w-72 h-72 relative">
-          <div class="flex justify-end items-center w-full gap-2 absolute right-2 top-2 z-10">
-            <div class="bg-nosferatu-800 text-nosferatu-300 font-medium shadow-sm px-2 py-1 rounded text-xs capitalize"
-                 *ngFor="let key of selectedBomb?.bombs[this.selecao.bomb]?.keys">
-              {{ key }}
+        <div class="flex flex-wrap gap-4">
+          <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden relative basis-64 h-64 flex-1">
+            <div class="flex justify-end items-center w-full gap-2 absolute right-2 top-2 z-10">
+              <div class="bg-nosferatu-800 text-nosferatu-300 font-medium shadow-sm px-2 py-1 rounded text-xs capitalize"
+                   *ngFor="let key of selectedBomb?.bombs[this.selecao.bomb]?.keys">
+                {{ key }}
+              </div>
             </div>
+            <img *ngIf="selecao.bomb !== null"
+                 src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/position.jpg"
+                 alt="image"
+                 class="object-cover w-full transition-all zoom-img" />
           </div>
-          <img *ngIf="selecao.bomb !== null"
-               src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/position.jpg"
-               alt="image"
-               class="object-cover h-full transition-all zoom-img" />
-        </div>
 
-        <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden w-72 h-72 relative">
-          <img *ngIf="selecao.bomb !== null"
-               src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/pixel.jpg"
-               alt="image"
-               class="object-cover h-full transition-all zoom-img" />
+          <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden relative basis-64 h-64 flex-1">
+            <img *ngIf="selecao.bomb !== null"
+                 src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/pixel.jpg"
+                 alt="image"
+                 class="object-cover w-full transition-all zoom-img" />
+          </div>
         </div>
 
         <div class="flex justify-center items-center h-8"
@@ -280,10 +285,7 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <ng-container *ngIf="!filter.map">
-      <p class="text-nosferatu-300 text-center text-sm">Selecione um mapa e um time para ver as utilitárias.</p>
-    </ng-container>
+    </div>
   </div>
 </div>
