@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Maps } from '../assets/maps';
 
 @Component({
@@ -92,6 +92,14 @@ export class AppComponent {
     slot: null
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    event.target.innerWidth;
+    console.log(event);
+    this.getWidthSvg()
+    this.getHeightSvg()
+  }
+
   selecionaSlot(event: any, bomb: any, idSlot: number) {
     if (event) {
       event.stopPropagation()
@@ -150,5 +158,21 @@ export class AppComponent {
     if (change) {
       this.changeFilter();
     }
+  }
+
+  getWidthSvg(): number {
+    const map = document.querySelector('#map');
+    const teste = map?.getBoundingClientRect();
+    console.log('teste', teste);
+
+    return teste?.width!;
+  }
+
+  getHeightSvg(): number {
+    const map = document.querySelector('#map');
+    const teste = map?.getBoundingClientRect();
+    console.log('teste', teste);
+
+    return teste?.height!;
   }
 }

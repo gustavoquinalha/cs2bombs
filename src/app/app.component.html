@@ -1,7 +1,7 @@
-<div class="sm:p-4 flex gap-4 flex-col w-full max-w-7xl mx-auto"
+<div class="sm:p-4 flex gap-3 flex-col w-full max-w-7xl mx-auto"
      *ngIf="filter">
-  <div class="sticky top-0 left-0 shadow w-full p-2 sm:p-4 sm:rounded-md bg-nosferatu-900 z-50">
-    <div class="flex md:flex-row flex-col gap-2 sm:gap-4 w-full items-center justify-center">
+  <div class="sticky top-0 left-0 shadow w-full p-2 sm:p-3 sm:rounded-md bg-nosferatu-900 z-50">
+    <div class="flex md:flex-row flex-col gap-2 sm:gap-3 w-full items-center justify-center">
       <img src="assets/img/logo.svg"
            alt="image"
            class="w-full max-w-[150px] my-3" />
@@ -9,7 +9,7 @@
       <hr class="w-[1px] h-10 bg-dracula-darker-800 border-none hidden md:block">
 
       <div class="relative md:basis-48 flex-1 w-full">
-        <div class="bg-nosferatu-800 rounded-lg h-10 capitalize text-xs font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate"
+        <div class="bg-nosferatu-800 rounded-lg h-10 capitalize text-sm font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer truncate"
              (click)="toggleDropdownMap(true, false)">
           <span class="truncate w-full">{{ filter.map }}</span>
         </div>
@@ -28,7 +28,7 @@
                      [(ngModel)]="filter.map"
                      (ngModelChange)="toggleDropdownMap(false, true)"
                      [value]="map.name" />
-              <span class="capitalize text-xs font-medium m-0 p-0 block w-full truncate">{{ map.name }}</span>
+              <span class="capitalize text-sm font-medium m-0 p-0 block w-full truncate">{{ map.name }}</span>
             </label>
           </ng-container>
         </div>
@@ -37,7 +37,7 @@
       <hr class="w-[1px] h-10 bg-dracula-darker-800 border-none hidden md:block">
 
       <div class="relative md:basis-48 flex-1 w-full">
-        <div class="bg-nosferatu-800 rounded-lg h-10 capitalize text-xs font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer"
+        <div class="bg-nosferatu-800 rounded-lg h-10 capitalize text-sm font-medium text-white whitespace-nowrap px-3 flex justify-start items-center outline-none shadow w-full text-left cursor-pointer"
              (click)="toggleDropdownTeam(true, false)">
           <span class="truncate w-full">{{ filter.team }}</span>
         </div>
@@ -56,7 +56,7 @@
                      [(ngModel)]="filter.team"
                      (ngModelChange)="toggleDropdownTeam(false, true)"
                      [value]="team.name" />
-              <span class="capitalize text-xs font-medium m-0 p-0 block w-full truncate">{{ team.name }}</span>
+              <span class="capitalize text-sm font-medium m-0 p-0 block w-full truncate">{{ team.name }}</span>
             </label>
           </ng-container>
         </div>
@@ -84,7 +84,7 @@
 
       <hr class="w-[1px] h-10 bg-dracula-darker-800 border-none hidden md:block">
 
-      <div class="relative md:basis-48 flex-1 hidden md:block w-full pointer-events-none select-none opacity-50">
+      <div class="relative md:basis-48 flex-1 hidden md:block w-full pointer-events-none select-none opacity-30">
         <span class="w-10 h-10 flex justify-center items-center text-center absolute">
           <svg width="24"
                height="24"
@@ -106,14 +106,14 @@
                id="search"
                [(ngModel)]="filter.search"
                (ngModelChange)="changeFilter()"
-               class="bg-nosferatu-800 rounded-lg h-10 text-xs font-medium text-white whitespace-nowrap pl-10 pr-3 flex justify-start items-center outline-none shadow w-full text-left truncate placeholder:text-white/50"
+               class="bg-nosferatu-800 rounded-lg h-10 text-sm font-normal text-white whitespace-nowrap pl-10 pr-3 flex justify-start items-center outline-none shadow w-full text-left truncate placeholder:text-white/50 placeholder:font-normal placeholder:text-sm"
                placeholder="Pesquisar..." />
       </div>
     </div>
   </div>
 
   <div class="w-full pt-4">
-    <div class="w-full grid gap-4 items-start justify-center grid-cols-4 p-4 sm:p-0"
+    <div class="w-full grid gap-3 items-start justify-center grid-cols-4 p-4 sm:p-0"
          *ngIf="filter.map">
 
       <div class="relative col-span-4 lg:col-span-3"
@@ -139,21 +139,42 @@
                         'bg-tr': bomb.team === 'terrorist',
                         'bg-ct': bomb.team === 'counter-terrorist'
                       }"></div>
+
+                    <div class="absolute -bottom-1 -right-1 w-5 h-5 text-sm text-white text-center flex justify-center items-center rounded-full bg-marcelin-500 font-bold shadow"
+                         *ngIf="bomb.bombs.length > 1">{{bomb.bombs.length}}</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <div class="absolute">
+            <!-- {{selectedBomb?.bombs[this.selecao.slot] | json}} -->
+            <svg *ngIf="selectedBomb?.bombs[this.selecao.slot]"
+                 height="100%"
+                 width="100%"
+                 [ngStyle]="{'width.px': getWidthSvg(), 'height.px': getHeightSvg(),}">
+              <line [attr.x1]="selectedBomb?.bombs[this.selecao.slot].slots.x1"
+                    [attr.y1]="selectedBomb?.bombs[this.selecao.slot].slots.y1"
+                    [attr.x2]="selectedBomb?.bombs[this.selecao.slot].slots.x2"
+                    [attr.y2]="selectedBomb?.bombs[this.selecao.slot].slots.y2"
+                    stroke-dasharray="4 4"
+                    style="stroke: #fff;" />
+            </svg>
+          </div>
         </ng-container>
 
         <img src="assets/img/maps/{{ filter.map }}/map.png"
              alt="image"
+             id="map"
              class="w-full" />
       </div>
 
-      <div *ngIf="selecao.bomb !== null" class="flex flex-col gap-4 col-span-4 lg:col-span-1">
+      <div class="flex flex-col gap-3 col-span-4 lg:col-span-1">
         <div class="flex gap-2">
-          <button class="pointer-events-none select-none opacity-50 w-full transition-all px-4 h-10 bg-nosferatu-800 hover:bg-nosferatu-700 text-white flex gap-2 justify-center items-center text-center rounded-md shadow outline-none">
+
+          <button [ngClass]="{'pointer-events-none select-none !bg-nosferatu-900 !text-nosferatu-700' : selecao.bomb === null}"
+                  class="w-full transition-all px-4 h-10 bg-nosferatu-800 hover:bg-nosferatu-700 text-white flex gap-2 justify-center items-center text-center rounded-md shadow outline-none">
             <svg class="h-4 w-4"
                  viewBox="0 0 24 24"
                  fill="none"
@@ -163,9 +184,14 @@
                  stroke-linejoin="round">
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
-            <span>Ver vídeo</span>
+            <span class="text-sm font-normal">Play tutorial</span>
           </button>
-          <button (click)="reset()"
+
+          <!-- <div class="text-white text-xs text-center w-full flex justify-center items-center">
+            {{selectedBomb?.bombs[this.selecao.bomb] | json}}
+          </div> -->
+
+          <!-- <button (click)="reset()"
                   class="w-10 h-10 text-lg transition-all bg-nosferatu-800 hover:bg-nosferatu-700 text-white flex justify-center items-center text-center rounded-md shadow outline-none"
                   style="min-width: 40px">
             <svg xmlns="http://www.w3.org/2000/svg"
@@ -185,16 +211,21 @@
                     y2="19"
                     stroke-miterlimit="10" />
             </svg>
-          </button>
+          </button> -->
         </div>
 
-        <div class="flex flex-wrap gap-4">
-          <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden relative basis-64 h-64 flex-1">
+        <div class="flex flex-wrap gap-3">
+          <div [ngClass]="{'border border-dashed border-nosferatu-800' : selecao.bomb === null, 'bg-nosferatu-800' : selecao.bomb !== null}"
+               class="rounded-md shadow text-center overflow-hidden relative basis-64 h-64 flex-1">
             <div class="flex justify-end items-center w-full gap-2 absolute right-2 top-2 z-10">
-              <div class="bg-nosferatu-800 text-nosferatu-300 font-medium shadow-sm px-2 py-1 rounded text-xs capitalize"
+              <div class="bg-nosferatu-800 text-nosferatu-300 font-medium shadow-sm px-2 py-1 rounded text-sm capitalize"
                    *ngFor="let key of selectedBomb?.bombs[this.selecao.bomb]?.keys">
                 {{ key }}
               </div>
+            </div>
+            <div class="text-dracula-darker-600 text-sm p-4"
+                 *ngIf="selecao.bomb === null">
+              Select a pixel to view
             </div>
             <img *ngIf="selecao.bomb !== null"
                  src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/position.jpg"
@@ -202,7 +233,14 @@
                  class="object-cover w-full transition-all zoom-img" />
           </div>
 
-          <div class="bg-nosferatu-900 rounded-md shadow overflow-hidden relative basis-64 h-64 flex-1">
+
+
+          <div [ngClass]="{'border border-dashed border-nosferatu-800' : selecao.bomb === null, 'bg-nosferatu-800' : selecao.bomb !== null}"
+               class="rounded-md shadow text-center overflow-hidden relative basis-64 h-64 flex-1">
+            <div class="text-dracula-darker-600 text-sm p-4"
+                 *ngIf="selecao.bomb === null">
+              Select a pixel to view
+            </div>
             <img *ngIf="selecao.bomb !== null"
                  src="assets/img/maps/{{ filter.map }}/{{ selecao?.bomb }}/{{ selecao?.slot }}/pixel.jpg"
                  alt="image"
@@ -210,8 +248,7 @@
           </div>
         </div>
 
-        <div class="flex justify-center items-center h-8"
-             *ngIf="selecao.bomb !== null">
+        <div class="flex justify-center items-center h-8">
           <div class="text-nosferatu-600 hover:text-nosferatu-500 cursor-pointer transition-colors"
                [ngClass]="{
               'pointer-events-none opacity-20': selecao?.slot <= 0
@@ -243,7 +280,7 @@
             </svg>
           </div>
 
-          <div class="gap-2 flex justify-center items-center w-full">
+          <div class="gap-1.5 flex justify-center items-center w-full">
             <ng-container *ngFor="let bomb of selectedBomb?.bombs">
               <div (click)="setPixel(bomb)"
                    [ngClass]="{
@@ -285,6 +322,10 @@
           </div>
         </div>
       </div>
+
+      <!-- <div class="text-dracula-darker-600 col-span-4 lg:col-span-1 text-center text-sm border border-dashed border-dracula-darker-600 rounded-md p-4">
+        
+      </div> -->
 
     </div>
   </div>

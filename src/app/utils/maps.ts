@@ -16,5 +16,6 @@ export interface MapaSlots {
 export interface Bombs {
     id: number;
     name: string;
-    keys: string[]
+    keys: string[];
+    slots: any;
 }

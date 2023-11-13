@@ -15,12 +15,24 @@ export const Maps: Mapa[] = [
           {
             id: 0,
             name: "Smoke janela 1",
-            keys: ['d', 'jumpthrow']
+            keys: ['d', 'jumpthrow'],
+            slots: {
+              x1: '37%',
+              y1: '43%',
+              x2: '98.2%',
+              y2: '23.5%',
+            }
           },
           {
             id: 1,
             name: "Smoke janela 2",
-            keys: []
+            keys: [],
+            slots: {
+              x1: '37%',
+              y1: '43%',
+              x2: '73%',
+              y2: '43%',
+            }
           }
         ]
       },
@@ -34,7 +46,8 @@ export const Maps: Mapa[] = [
           {
             id: 0,
             name: "Smoke cabecinha 1",
-            keys: []
+            keys: [],
+            slots: {}
           },
         ]
       },
@@ -48,7 +61,8 @@ export const Maps: Mapa[] = [
           {
             id: 0,
             name: "Smoke Caverna 1",
-            keys: []
+            keys: [],
+            slots: {}
           },
         ]
       },
@@ -62,7 +76,8 @@ export const Maps: Mapa[] = [
           {
             id: 0,
             name: "Smoke liga 1",
-            keys: []
+            keys: [],
+            slots: {}
           },
         ]
       },
@@ -76,7 +91,8 @@ export const Maps: Mapa[] = [
           {
             id: 0,
             name: "Smoke palacio 1",
-            keys: []
+            keys: [],
+            slots: {}
           },
         ]
       },
@@ -90,7 +106,8 @@ export const Maps: Mapa[] = [
           {
             id: 0,
             name: "Smoke ct 1",
-            keys: []
+            keys: [],
+            slots: {}
           },
         ]
       },
@@ -104,7 +121,8 @@ export const Maps: Mapa[] = [
           {
             id: 0,
             name: "Smoke jungle 1",
-            keys: []
+            keys: [],
+            slots: {}
           },
         ]
       }
